@@ -1,39 +1,35 @@
-package com.example.webview;
+package com.example.imageslider;
 
 import android.os.Bundle;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.models.SlideModel;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
-    private WebView wb;
-
+    ImageSlider ms;
     @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        wb = (WebView) findViewById(R.id.webview);
-        wb.setWebViewClient(new WebViewClient());
-        wb.loadUrl("https://www.google.com");
+        ms = findViewById(R.id.is);
+        ArrayList<SlideModel> mlist = new ArrayList<>();
+        mlist.add(new SlideModel((R.drawable.one) , null));
+        mlist.add(new SlideModel((R.drawable.two) , null));
+        mlist.add(new SlideModel((R.drawable.three) , null));
+        mlist.add(new SlideModel((R.drawable.four) , null));
+        mlist.add(new SlideModel((R.drawable.five) , null));
+        mlist.add(new SlideModel((R.drawable.six) , null));
 
-        WebSettings webset = wb.getSettings();
-        webset.setJavaScriptEnabled(true);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(wb.canGoBack()){
-            wb.goBack();
-        }else{super.onBackPressed();}
-
+        ms.setImageList(mlist);
     }
 }
